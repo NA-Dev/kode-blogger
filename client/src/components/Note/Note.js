@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
 import tinymce from 'tinymce';
 import 'tinymce/themes/modern';
@@ -10,8 +11,12 @@ import "./Note.css";
 class App extends Component {
   content = " ";
   
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = {
+      articleId: this.props.match.params.articleId,
+      redirect: false
+    }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -22,8 +27,7 @@ class App extends Component {
   handleSubmit(event) {
     event.preventDefault();
     // let data = tinymce.get('textbody').getContent()
-    console.log(this.content)
-    fetch('/posts', {
+    fetch(`/notes/${this.state.articleId}`, {
       method: 'POST',
       body: JSON.stringify({
         content: this.content
@@ -31,6 +35,9 @@ class App extends Component {
       headers: {
         'content-type': 'application/json'
       }
+    }).then(res => {
+      console.log(res);
+      this.setState({redirect: true});
     });
   }
     
@@ -40,9 +47,8 @@ class App extends Component {
   render() {
     
     return (
-
-        
       <div>
+        {this.state.redirect ? <Redirect to={`/posts/${this.state.articleId}`} /> : ''}
         <h2><span id="recent-post-title">add</span><span id="recent-post-title-second">Comment</span><span id="recent-post-curly">&#123;</span></h2>
           <form onSubmit={this.handleSubmit.bind(this)}>
               <Editor

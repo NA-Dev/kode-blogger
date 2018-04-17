@@ -5,21 +5,17 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true, 
         autoIncrement: true,
       },
-      title: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
       author: {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      body: {
+      content: {
         type: DataTypes.JSON,
-        allowNull: true,
+        allowNull: false,
       },
-      published: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: 0
+      articleId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
       }
     }, {
       timestamps: true 
