@@ -24,7 +24,7 @@ const Nav = (props) => (
       {props.loggedIn ? 
       <ul className="navbar-nav ml-auto mt-2 mt-md-0">        
         <li className="nav-item active ml-auto">
-          <Link to="/posts/all"><button className="btn  btn-sm btn-outline-light all-post-nav" type="button"><AllPostIcon /><span className="nav-button-spacing">All Posts</span></button></Link>
+          <Link to="/view/all"><button className="btn  btn-sm btn-outline-light all-post-nav" type="button"><AllPostIcon /><span className="nav-button-spacing">All Posts</span></button></Link>
         </li>
         <li className="nav-item active ml-auto">
           <Link to="/manageNotes"><button className="btn btn-sm  btn-outline-light my-post-nav" type="button"><MyPostIcon /><span className="nav-button-spacing">My Posts</span></button></Link>
@@ -37,7 +37,7 @@ const Nav = (props) => (
       : 
       <ul className="navbar-nav ml-auto mt-2 mt-md-0">
         <li className="nav-item active ml-auto">
-          <Link to="/posts/all"><button className="btn  btn-sm btn-outline-light all-post-nav" type="button"><AllPostIcon /><span className="nav-button-spacing">All Posts</span></button></Link>
+          <Link to="/view/all"><button className="btn  btn-sm btn-outline-light all-post-nav" type="button"><AllPostIcon /><span className="nav-button-spacing">All Posts</span></button></Link>
         </li>
         <NavSearch />
         <LoginNav {...props}/>

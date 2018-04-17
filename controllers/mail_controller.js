@@ -17,8 +17,8 @@ module.exports = {
       from: '"Kode Blogger" <kodeblogger@gmail.com>', 
       to: email, 
       subject: 'Kode Blogger - Account Verification', 
-      text: `http://localhost:3000/verify/${username}/${token}`, 
-      html: `<a href="http://localhost:3000/verify/${username}/${token}">Verify Now</a>` 
+      text: `http://kode-blogger.herokuapp.com/verify/${username}/${token}`, 
+      html: `<a href="http://kode-blogger.herokuapp.com/verify/${username}/${token}">Verify Now</a>` 
     };
   
     transporter.sendMail(mailOptions, (error, info) => {
@@ -34,8 +34,8 @@ module.exports = {
       from: '"Kode Blogger" <kodeblogger@gmail.com>', 
       to: email, 
       subject: 'Kode Blogger - Reset Password', 
-      text: `http://localhost:3000/reset/${username}/${token}`, 
-      html: `<a href="http://localhost:3000/reset/${username}/${token}">Reset Now</a>`  
+      text: `http://kode-blogger.herokuapp.com/reset/${username}/${token}`, 
+      html: `<a href="http://kode-blogger.herokuapp.com/reset/${username}/${token}">Reset Now</a>`  
     };
 
     transporter.sendMail(mailOptions, (error) => {

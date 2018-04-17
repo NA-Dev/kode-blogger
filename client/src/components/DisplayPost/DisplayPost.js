@@ -39,7 +39,6 @@ class DisplayPost extends Component {
       //Load note
       postApi.getById(this.props.match.params.id).then(res => {
         const val = JSON.parse(res.data.body);
-
         this.setState({
           value: val, 
           title: res.data.title, 
@@ -49,7 +48,6 @@ class DisplayPost extends Component {
           this.setState({ code, text });
         });
       }).catch(err => {
-        console.log('Caught error');
         this.setState({ errorRedirect: true });
       });
 
@@ -136,7 +134,7 @@ class DisplayPost extends Component {
         <ul className="list-group">
         { this.state.commentsHidden ? '' :
           this.state.comments.map(comment => 
-          <li className="list-group-item" dangerouslySetInnerHTML={{__html: comment.content}}></li>)
+          <li className="list-group-item" key={comment.id} dangerouslySetInnerHTML={{__html: comment.content}}></li>)
         }
         </ul>
         <h2><span id="recent-post-curly-end">&#125;</span></h2>

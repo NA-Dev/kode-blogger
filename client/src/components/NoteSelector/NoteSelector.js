@@ -1,16 +1,29 @@
 import React, {Component} from 'react';
 import postApi from '../../utils/postAPI';
 
-const NoteSelector = (props) => (
-      <select className="form-control" onChange={props.onNoteSelected}>
-        <option value="new" key={0}>Create New</option>
-        {props.posts.map((element, index) => {
+class NoteSelector extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {...props}
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({...props})
+  }
+
+  render() {
+    console.log("rendering")
+      return (
+      <select value={this.state.selected} className="form-control" onChange={this.state.onNoteSelected}>
+        <option value={"new"} key={"new"}>Create New</option>
+        {this.state.posts.map((element, index) => {
           return (
-            <option value={element.id} key={index}>{element.title}</option>
+            <option value={element.id} key={element.id}>{element.title}</option>
           )
         })}
       </select>
     )
-
+  }
+}
 
 export default NoteSelector;

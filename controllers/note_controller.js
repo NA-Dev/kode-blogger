@@ -10,10 +10,14 @@ const randomstring = require('randomstring');
 //   });
 
 router.post('/notes/:postId', (req, res) => {
-  console.log(req.body.content);
-  db.notes.create({content: req.body.content, articleId: req.params.postId}).then( data => {
-    res.json(data);
-  })
+  console.log(req.body.content.length);
+  if (req.body.content.length > 1) {
+    db.notes.create({content: req.body.content, articleId: req.params.postId}).then( data => {
+      res.json(data);
+    })
+  } else {
+    res.status(400).send();
+  }
 })
 
 router.get('/notes/:postId', (req, res) => {

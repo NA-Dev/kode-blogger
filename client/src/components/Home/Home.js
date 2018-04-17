@@ -30,11 +30,11 @@ class Home extends Component {
   }
 
   viewPost = (id) => {
-    this.setState({redirect: <Redirect to={`/posts/${id}`} /> })
+    this.setState({redirect: <Redirect to={`/view/${id}`} /> })
   }
 
   getAllPosts = () => {
-    this.setState({redirect: <Redirect to={`posts/all`} />})
+    this.setState({redirect: <Redirect to={`/view/all`} />})
   }
 
 
@@ -49,9 +49,12 @@ class Home extends Component {
         <div>
         {this.state.notes.map(note => {
           return (
-            <PostListItem key={note.id} {...note}>
-            <div className="text-center"><button className="btn btn-outline-dark view-post-button" type="button" onClick={() => this.viewPost(note.id)}><ViewPostIcon  /><span className="button-spacing">View Post</span></button></div>
-            </PostListItem>
+            <div key={note.id} className="text-center">
+              
+              <Link to={`/view/${note.id}`} >
+                <PostListItem {...note} />
+              </Link>
+            </div>
           );
         })}
         

@@ -36,7 +36,7 @@ router.get('/posts/:id', (req, res) => {
     where: {id: req.params.id}
   }).then(data => {
     if (req.session.passport.user) {
-      if (data.published || data.author === req.session.passport.user) {
+      if (data.published || data.author == req.session.passport.user) {
         return res.json(data);
       }
     } else {
@@ -113,7 +113,6 @@ router.get('/posts/publish/:id', (req, res) => {
     }).then(data => {
       res.status(200).send();
     }).catch(err => {
-      console.log(err);
       res.status(500).send();
     })
   }

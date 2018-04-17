@@ -12,7 +12,7 @@ const PostListItem = ({title, id, created, updated, children}) => (
           <div className="row">
             <div className="col-12 ml-auto">
               {created ? <p>Created {new Date(created).toLocaleDateString()}</p> : ''}
-              {updated ? <p>Modified {new Date(updated).toLocaleDateString()}</p> : ''}
+              {updated && updated != created ? <p>Modified {new Date(updated).toLocaleDateString()}</p> : ''}
             </div>
           </div>
           <div className="row">

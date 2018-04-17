@@ -23,7 +23,7 @@ class AllPosts extends Component {
   };
 
   viewPost = (id) => {
-    this.setState({redirect: <Redirect to={`/posts/${id}`} /> })
+    this.setState({redirect: <Redirect to={`/view/${id}`} /> })
   }
 
   render() {
