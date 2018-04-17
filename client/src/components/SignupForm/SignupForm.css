@@ -1,6 +1,16 @@
 .signupContainer {
   width: 30%;
 }
+#logoSignup {
+  text-align: center;
+  line-height: 0px;
+  padding-bottom: 40px;
+}
+
+#signupContainer {
+  background-color: #01c6af
+  !important;
+}
 
 input {
   clear: both;

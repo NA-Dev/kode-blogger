@@ -1,0 +1,18 @@
+code {
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+   }
+
+.text-output {
+    background: white;
+}
+.prev-button, .next-button {
+    background: #03717f;
+}
+#prev-button :hover,#next-button :hover {
+    background: #03717f;
+    text-shadow: .5px .5px 2px rgba(0, 0, 0, 0.29);
+}

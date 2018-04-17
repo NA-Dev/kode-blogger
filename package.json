@@ -18,21 +18,26 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+    "@tinymce/tinymce-react": "^2.2.4",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
+    "cheerio": "^1.0.0-rc.2",
     "connect-flash": "^0.1.1",
+    "connect-session-sequelize": "^5.2.1",
     "cookie-parser": "^1.4.3",
     "dotenv": "^5.0.1",
     "express": "^4.15.4",
     "express-session": "^1.15.6",
+    "immutable": "^3.8.2",
     "mysql2": "^1.5.3",
     "nodemailer": "^4.6.4",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "prismjs": "^1.13.0",
     "randomstring": "^1.1.5",
+    "request": "^2.85.0",
     "sequelize": "^4.37.5",
-    "sequelstore-connect": "^1.1.5",
+    "tinymce": "^4.7.10",
     "winston": "^2.4.1"
   }
 }

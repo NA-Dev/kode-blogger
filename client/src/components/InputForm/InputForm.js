@@ -2,125 +2,176 @@ import React, {Component} from 'react';
 import { Editor } from 'slate-react';
 import { Value } from 'slate';
 import { isKeyHotkey } from 'is-hotkey'
-import PluginEditCode from 'slate-edit-code';
-import Prism from 'prismjs';
-import SlatePrism from 'slate-prism';
-import initialValue from './value.json';
+import PluginPrism from 'slate-prism';
+import PluginEditCode from 'slate-edit-code'
+import defaultValue from './value.json';
+import Html from 'slate-html-serializer';
+import serializeRules from './serialize-rules';
+import axios from 'axios';
+import NoteSelector from '../NoteSelector/NoteSelector';
+import postApi from '../../utils/postAPI';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import SavePostIcon from '../Icons/SavePostIcon';
+import ViewPostIcon from '../Icons/ViewPostIcon';
 import "./InputForm.css";
-import './prism-okaidia.css';
 
-/**
- * Define the default node type.
- *
- * @type {String}
- */
+/* State.Value to HTML serializer */
+const html = new Html({ rules: serializeRules });
 
+/* Plugins */
+const plugin = PluginEditCode({
+  onlyIn: node => node.type === 'code_block'
+})
+const plugins = [
+  PluginPrism({
+      onlyIn: node => node.type === 'code_block',
+      getSyntax: node => node.data.get('syntax')
+  }),
+  plugin
+];
+
+/* Editor Defaults */
+let DEFAULT_CODE_LANGUAGE = 'javascript'
 const DEFAULT_NODE = 'paragraph'
 
-/**
- * Define hotkey matchers.
- *
- * @type {Function}
- */
-
+/* Hotkeys */
 const isBoldHotkey = isKeyHotkey('mod+b')
 const isItalicHotkey = isKeyHotkey('mod+i')
 const isUnderlinedHotkey = isKeyHotkey('mod+u')
 const isCodeHotkey = isKeyHotkey('mod+`')
 
+/**
+ * Syntax Selector Component
+ */
 
-function CodeBlock(props) {
-  const { editor, node } = props
-  const language = node.data.get('language')
-
-  function onChange(event) {
-    editor.change(c =>
-      c.setNodeByKey(node.key, { data: { language: event.target.value } })
-    )
+class GlobalCodeSyntaxSelector extends Component {
+  state = {
+    value: DEFAULT_CODE_LANGUAGE,
   }
 
-  return (
-    <div style={{ position: 'relative' }}>
-      <pre>
-        <code {...props.attributes}>{props.children}</code>
-      </pre>
+  onChange = (event) => {
+    this.setState({value: event.target.value})
+    DEFAULT_CODE_LANGUAGE = event.target.value
+  }
+
+  render() {
+    return (
       <div
-        contentEditable={false}
-        style={{ position: 'absolute', top: '5px', right: '5px' }}
-      >
-        <select value={language} onChange={onChange}>
+      contentEditable={false}
+      style={{ position: 'absolute', top: '0px', right: '5px' }}>
+        <select value={this.state.value} onChange={this.onChange}>
           <option value="css">CSS</option>
-          <option value="js">JavaScript</option>
+          <option value="javascript">JavaScript</option>
           <option value="html">HTML</option>
         </select>
       </div>
-    </div>
-  )
+    )
+  }
 }
-
-function CodeBlockLine(props) {
-  return <div {...props.attributes}>{props.children}</div>
-}
-
 
 /**
- * The rich text example.
- *
- * @type {Component}
+ * Code Block Component
  */
 
-class RichTextExample extends Component {
-  /**
-   * Deserialize the initial editor value.
-   *
-   * @type {Object}
-   */
-
+class CodeBlock extends Component {
   state = {
-    value: Value.fromJSON(initialValue),
+    syntax: DEFAULT_CODE_LANGUAGE
   }
 
-  /**
-   * Check if the current selection has a mark with `type` in it.
-   *
-   * @param {String} type
-   * @return {Boolean}
-   */
-
-  hasMark = type => {
-    const { value } = this.state
-    return value.activeMarks.some(mark => mark.type == type)
+  setSyntax = (event) => {
+    if (event) {
+      this.setState({syntax: event.target.value || DEFAULT_CODE_LANGUAGE})
+      this.props.editor.change(c =>
+        c.setNodeByKey(this.props.node.key, { data: { syntax: event.target.value || DEFAULT_CODE_LANGUAGE } })
+      )
+    } else {
+      this.props.editor.change(c =>
+        c.setNodeByKey(this.props.node.key, { data: { syntax: this.state.syntax } })
+      )
+    }
   }
 
-  /**
-   * Check if the any of the currently selected blocks are of `type`.
-   *
-   * @param {String} type
-   * @return {Boolean}
-   */
-
-  hasBlock = type => {
-    const { value } = this.state
-    return value.blocks.some(node => node.type == type)
+  componentDidMount = (event) => {
+    this.setSyntax()
   }
 
-  /**
-   * On change, save the new `value`.
-   *
-   * @param {Change} change
-   */
+  render() {
+    let syntax = this.state.syntax
+
+    return (
+      <div style={{ position: 'relative' }}>
+        <pre className={"language-" + syntax + " code_block"}>
+          <code className={"language-" + syntax} {...this.props.attributes}>{this.props.children}</code>
+        </pre>
+        <div
+          contentEditable={false}
+          style={{ position: 'absolute', top: '-8px', right: '5px' }}
+        >
+        </div>
+      </div>
+    )
+  }
+}
+
+/**
+ * Code Line Component
+ */
+
+class CodeLine extends Component {
+  setSyntax = (syntax) => {
+      this.props.editor.change(c =>
+        c.setNodeByKey(this.props.node.key, {syntax})
+      )
+  }
+
+  componentDidMount(props) {
+    this.setSyntax(DEFAULT_CODE_LANGUAGE);
+  }
+
+  render() {
+    return(
+      <div data-syntax={DEFAULT_CODE_LANGUAGE} {...this.props.attributes}>{this.props.children}</div>
+    )
+  }
+}
+
+/**
+ * Input Form Component
+ */
+
+class InputForm extends Component {
+  initialValue = { 
+    // value: html.deserialize(initialValue)
+    value: Value.fromJSON(defaultValue),
+    title: 'Untitled Note',
+    noteId: "new"
+  }
+
+  state = {...this.initialValue, titles: [], showPreview: false}
+
+  componentDidMount() {
+    postApi.getActiveUserPosts().then(res => {
+      this.setState({
+        titles: res.data.map(element => ({id: element.id, title: element.title, body: element.body})) 
+      }) 
+    });
+    if (this.props.match.params.id) {
+      //Load note
+      postApi.getById(this.props.match.params.id).then(res => {
+        const val = Value.fromJSON(JSON.parse(res.data.body));
+        this.setState({value: val, title: res.data.title, noteId: res.data.id});
+      });
+    }
+  }
 
   onChange = ({ value }) => {
     this.setState({ value })
   }
 
-  /**
-   * On key down, if it's a formatting command toggle a mark.
-   *
-   * @param {Event} event
-   * @param {Change} change
-   * @return {Change}
-   */
+  onTitleChange = (event) => {
+    this.setState({title: event.target.value});
+  }
 
   onKeyDown = (event, change) => {
     let mark
@@ -135,30 +186,101 @@ class RichTextExample extends Component {
       mark = 'code'
     } else {
       mark = null;
-    }
- 
+    } 
+    
     if (mark) {
       event.preventDefault()
       change.toggleMark(mark)
-    } else {
-      const { value } = change
-      const { startBlock } = value
-  
-      if (event.key != 'Enter') return
-      if (startBlock.type != 'block-code') return
-      if (value.isExpanded) change.delete()
-      change.insertText('\n')
     }
- 
-    return
   }
 
-  /**
-   * When a mark button is clicked, toggle the current mark.
-   *
-   * @param {Event} event
-   * @param {String} type
-   */
+  /* Handle DB Save */
+  onSaveClick = event => {
+    if (this.state.noteId === this.initialValue.noteId) {
+      let valueString = JSON.stringify(this.state.value.toJSON());
+      valueString = valueString.replace(/("type":"code_line","isVoid":false,"data":{})/g, `"type":"code_line","isVoid":false,"data":{"syntax":"${DEFAULT_CODE_LANGUAGE}"}`);
+      valueString = valueString.replace(/("type":"code_block","isVoid":false,"data":{})/g, `"type":"code_block","isVoid":false,"data":{"syntax":"${DEFAULT_CODE_LANGUAGE}"}`);
+      postApi.createPost({title: this.state.title, jsonBody: valueString})
+      .then((data)=> {
+        this.setState({ ...data })
+        confirmAlert({
+          title: `New post created. Publish in "My Posts"`,
+          buttons: [
+            {
+              label: 'OK'
+            }
+          ]
+        });
+      });
+    } else {
+      let valueString = JSON.stringify(this.state.value.toJSON());
+      valueString = valueString.replace(/("type":"code_line","isVoid":false,"data":{})/g, `"type":"code_line","isVoid":false,"data":{"syntax":"${DEFAULT_CODE_LANGUAGE}"}`);
+      valueString = valueString.replace(/("type":"code_block","isVoid":false,"data":{})/g, `"type":"code_block","isVoid":false,"data":{"syntax":"${DEFAULT_CODE_LANGUAGE}"}`);
+      postApi.updatePost(this.state.noteId, {jsonBody: valueString, title: this.state.title})
+      .then((data)=> {
+        this.setState({ ...data })
+        confirmAlert({
+          title: `Post updated. Publish in "My Posts"`,
+          buttons: [
+            {
+              label: 'OK'
+            }
+          ]
+        });
+      });
+    }
+    //Update note titles due to save action possibly changing a title
+    postApi.getActiveUserPosts().then(res => {
+      this.setState({
+        titles: res.data.map(element => ({id: element.id, title: element.title, body: element.body})),
+      }) 
+    });
+  }
+
+  /* Handle DB Retrieval */
+  onNoteSelected = event => {
+    if (event.target.value === this.initialValue.noteId) {
+      this.setState({...this.initialValue})
+    }
+
+    postApi.getById(event.target.value).then(res => {
+      if (res.data) {
+        this.setState(
+          {
+            value: Value.fromJSON(JSON.parse(res.data.body)), 
+            noteId: res.data.id,
+            title: res.data.title
+          }
+        )
+      }
+    })
+  }
+
+  onPreviewClicked = () => {
+    this.setState({showPreview: !this.state.showPreview});
+  }
+
+ /*----- Toolbar Functions -----*/
+
+  onToggleCode = (event) => {
+    event.preventDefault()
+    const value = this.state.value;
+
+    this.onChange(
+      plugin.changes.toggleCodeBlock(value.change(), DEFAULT_NODE).focus()
+    );
+  };
+
+  hasMark = type => {
+    const { value } = this.state
+    return value.activeMarks.some(mark => mark.type===type)
+  }
+
+  hasBlock = type => {
+    const { value } = this.state
+    if (type==="code_block") type="code_line"
+    return value.blocks.some(node => node.type===type)
+  }
 
   onClickMark = (event, type) => {
     event.preventDefault()
@@ -167,24 +289,17 @@ class RichTextExample extends Component {
     this.onChange(change)
   }
 
-  /**
-   * When a block button is clicked, toggle the block type.
-   *
-   * @param {Event} event
-   * @param {String} type
-   */
-
   onClickBlock = (event, type) => {
     event.preventDefault()
     const { value } = this.state
     const change = value.change()
     const { document } = value
 
-    if (type == 'bulleted-list' || type == 'numbered-list') {
+    if (type==='bulleted-list' || type==='numbered-list') {
       // Handle the extra wrapping required for list buttons.
       const isList = this.hasBlock('list-item')
       const isType = value.blocks.some(block => {
-        return !!document.getClosest(block.key, parent => parent.type == type)
+        return !!document.getClosest(block.key, parent => parent.type===type)
       })
 
       if (isList && isType) {
@@ -196,38 +311,17 @@ class RichTextExample extends Component {
         change
           .unwrapBlock('bulleted-list')
           .unwrapBlock('numbered-list')
-          .unwrapBlock('code-block')
           .wrapBlock(type)
       } else {
         change.setBlocks('list-item').wrapBlock(type)
       }
-    } else if (type == 'block-code') {
-      // Handle the extra wrapping required for block-code.
-      const hasLines = this.hasBlock('code-line')
-      const isType = value.blocks.some(block => {
-        return !!document.getClosest(block.key, parent => parent.type == type)
-      })
 
-      if (hasLines && isType) {
-        change
-          .setBlocks('DEFAULT_NODE')
-          .unwrapBlock('block-code')
-      } else if (hasLines) {
-        change
-          .unwrapBlock('bulleted-list')
-          .unwrapBlock('numbered-list')
-          .wrapBlock(type)
-      } else {
-        change
-          .setBlocks('code-line')
-          .unwrapBlock('bulleted-list')
-          .unwrapBlock('numbered-list')
-          .wrapBlock(type)
-      }
-
+    } else if (type==="code_block") {
+      this.onToggleCode(event)
+      return
 
     } else {
-      // Handle everything but list buttons and block-code
+      // Handle everything but list buttons
       const isActive = this.hasBlock(type)
       const isList = this.hasBlock('list-item')
 
@@ -244,51 +338,74 @@ class RichTextExample extends Component {
     this.onChange(change)
   }
 
-  /**
-   * Render.
-   *
-   * @return {Element}
-   */
+  /*----- Render Functions -----*/
 
   render() {
     return (
-      <div className="inputForm">
-        {this.renderToolbar()}
-        {this.renderEditor()}
+      <div>
+        <div className="row">
+          <NoteSelector newId={this.initialValue.noteId} onNoteSelected={this.onNoteSelected} posts={this.state.titles} />
+        </div>
+        <div className="text-center">
+          <button className="btn btn-secondary m-2 save-post-button" onClick={this.onSaveClick}><SavePostIcon /><span className="button-spacing">Save</span></button>
+          <a href={`/posts/${this.state.noteId}`} target="_blank">
+            <button className="btn btn-secondary m-2 preview-post-button"><ViewPostIcon /><span className="button-spacing">
+              Open Preview
+            </span></button>
+          </a>
+        </div>
+        <div className="row">
+          <div className={'input-form col-md-12'}>
+            <input value={this.state.title} onChange={this.onTitleChange} type="text" placeholder={this.initialValue.title} />
+            {this.renderToolbar()}
+            {this.renderEditor()}
+          </div>
+        </div>
       </div>
     )
   }
 
-  /**
-   * Render the toolbar.
-   *
-   * @return {Element}
-   */
+  renderOutput() {
+
+  }
+
+  renderEditor = () => {
+    return (
+      <div className="editor">
+        <Editor
+          placeholder="Enter some rich text..."
+          value={this.state.value}
+          onChange={this.onChange}
+          onKeyDown={this.onKeyDown}
+          renderNode={this.renderNode}
+          renderMark={this.renderMark}
+          plugins={plugins}
+          spellCheck
+          autoFocus
+        />
+      </div>
+    )
+  }
 
   renderToolbar = () => {
     return (
-      <div className="menu toolbar-menu">
-        {this.renderMarkButton('bold', 'format_bold')}
-        {this.renderMarkButton('italic', 'format_italic')}
-        {this.renderMarkButton('underlined', 'format_underlined')}
-        {this.renderMarkButton('code', 'code')}
-        {this.renderBlockButton('heading-one', 'looks_one')}
-        {this.renderBlockButton('heading-two', 'looks_two')}
-        {this.renderBlockButton('block-quote', 'format_quote')}
-        {this.renderBlockButton('numbered-list', 'format_list_numbered')}
-        {this.renderBlockButton('bulleted-list', 'format_list_bulleted')}
-        {this.renderBlockButton('block-code', 'code')}
+      <div className="menu" style={{ position: 'relative'}}>
+        <div className="toolbar">
+            {this.renderMarkButton('bold', 'format_bold')}
+            {this.renderMarkButton('italic', 'format_italic')}
+            {this.renderMarkButton('underlined', 'format_underlined')}
+            {this.renderMarkButton('code', 'code')}
+            {this.renderBlockButton('heading-one', 'looks_one')}
+            {this.renderBlockButton('heading-two', 'looks_two')}
+            {this.renderBlockButton('block-quote', 'format_quote')}
+            {this.renderBlockButton('numbered-list', 'format_list_numbered')}
+            {this.renderBlockButton('bulleted-list', 'format_list_bulleted')}
+            {this.renderBlockButton('code_block', 'code')}
+        </div>
+        <GlobalCodeSyntaxSelector />
       </div>
     )
   }
-
-  /**
-   * Render a mark-toggling toolbar button.
-   *
-   * @param {String} type
-   * @param {String} icon
-   * @return {Element}
-   */
 
   renderMarkButton = (type, icon) => {
     const isActive = this.hasMark(type)
@@ -302,56 +419,17 @@ class RichTextExample extends Component {
     )
   }
 
-  /**
-   * Render a block-toggling toolbar button.
-   *
-   * @param {String} type
-   * @param {String} icon
-   * @return {Element}
-   */
-
   renderBlockButton = (type, icon) => {
     const isActive = this.hasBlock(type)
     const onMouseDown = event => this.onClickBlock(event, type)
 
     return (
       // eslint-disable-next-line react/jsx-no-bind
-      <span className="button" onMouseDown={onMouseDown} data-active={isActive}>
+      <span className="button" onMouseDown={onMouseDown} data-type={type} data-active={isActive}>
         <span className="material-icons">{icon}</span>
       </span>
     )
   }
-
-  /**
-   * Render the Slate editor.
-   *
-   * @return {Element}
-   */
-
-  renderEditor = () => {
-    return (
-      <div className="editor">
-        <Editor
-          placeholder="Enter some rich text..."
-          value={this.state.value}
-          onChange={this.onChange}
-          onKeyDown={this.onKeyDown}
-          renderNode={this.renderNode}
-          renderMark={this.renderMark}
-          decorateNode={this.decorateNode}
-          spellCheck
-          autoFocus
-        />
-      </div>
-    )
-  }
-
-  /**
-   * Render a Slate node.
-   *
-   * @param {Object} props
-   * @return {Element}
-   */
 
   renderNode = props => {
     const { attributes, children, node } = props
@@ -368,21 +446,16 @@ class RichTextExample extends Component {
         return <li {...attributes}>{children}</li>
       case 'numbered-list':
         return <ol {...attributes}>{children}</ol>
-      case 'block-code':
+      case 'code_block':
         return <CodeBlock {...props} />
-      case 'code-line':
-        return <CodeBlockLine {...props} />
-      // default:
-      //   return
+      case 'code_line':
+        return <CodeLine {...props} />;
+      case 'paragraph':
+        return <p {...attributes}>{children}</p>
+      default:
+        return null
     }
   }
-
-  /**
-   * Render a Slate mark.
-   *
-   * @param {Object} props
-   * @return {Element}
-   */
 
   renderMark = props => {
     const { children, mark } = props
@@ -395,7 +468,6 @@ class RichTextExample extends Component {
         return <em>{children}</em>
       case 'underlined':
         return <u>{children}</u>
-
       case 'comment':
         return <span style={{ opacity: '0.33' }}>{children}</span>
       case 'keyword':
@@ -404,81 +476,9 @@ class RichTextExample extends Component {
         return <span style={{ fontWeight: 'bold' }}>{children}</span>
       case 'punctuation':
         return <span style={{ opacity: '0.75' }}>{children}</span>
-        // default:
-        //   return
+        default:
+          return null
     }
-  }
-
-  tokenToContent = token => {
-    if (typeof token == 'string') {
-      return token
-    } else if (typeof token.content == 'string') {
-      return token.content
-    } else {
-      return token.content.map(this.tokenToContent).join('')
-    }
-  }
-
-   /**
-   * Decorate code blocks with Prism.js highlighting.
-   *
-   * @param {Node} node
-   * @return {Array}
-   */
-
-  decorateNode = node => {
-    if (node.type != 'block-code') return
-
-    // default language for new blocks is css
-    const language = node.data.get('language') || 'css'
-    const texts = node.getTexts().toArray()
-    const string = texts.map(t => t.text).join('\n')
-    const grammar = Prism.languages[language]
-    const tokens = Prism.tokenize(string, grammar)
-    const decorations = []
-    let startText = texts.shift()
-    let endText = startText
-    let startOffset = 0
-    let endOffset = 0
-    let start = 0
-
-    for (const token of tokens) {
-      startText = endText
-      startOffset = endOffset
-
-      const content = this.tokenToContent(token)
-      const newlines = content.split('\n').length - 1
-      const length = content.length - newlines
-      const end = start + length
-
-      let available = startText.text.length - startOffset
-      let remaining = length
-
-      endOffset = startOffset + remaining
-
-      while (available < remaining && texts.length > 0) {
-        endText = texts.shift()
-        remaining = length - available
-        available = endText.text.length
-        endOffset = remaining
-      }
-
-      if (typeof token != 'string') {
-        const range = {
-          anchorKey: startText.key,
-          anchorOffset: startOffset,
-          focusKey: endText.key,
-          focusOffset: endOffset,
-          marks: [{ type: token.type }],
-        }
-
-        decorations.push(range)
-      }
-
-      start = end
-    }
-
-    return decorations
   }
 }
 
@@ -486,4 +486,4 @@ class RichTextExample extends Component {
  * Export.
  */
 
-export default RichTextExample
+export default InputForm

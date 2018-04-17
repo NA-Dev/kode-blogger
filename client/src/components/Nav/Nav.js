@@ -1,31 +1,51 @@
 import React from "react";
 import "./Nav.css";
 import LoginNav from '../LoginNav/LoginNav';
+import NavSearch from '../NavSearch/NavSearch';
+import { Link } from 'react-router-dom'
+import MyPostIcon from '../Icons/MyPostIcon';
+import NewPostIcon from '../Icons/NewPostIcon';
+import AllPostIcon from '../Icons/AllPostIcon';
+import SearchIcon from '../Icons/SearchIcon';
+import UserIcon from '../Icons/UserIcon';
+
 
 
 const Nav = (props) => (
-  <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-    <a className="navbar-brand" href="/">
-      Kode Blogger
-    </a>
-    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+  <div className="container-flex">
+  <nav className="navbar navbar-expand-lg navbar-custom mb-3">
+    <Link to="/" className="navbar-brand"> 
+    <span className="logoOne"> 
+      kode</span><span className="logoTwo">Blogger</span></Link>
+    <button className="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-      <ul className="navbar-nav mr-auto mt-2 mt-md-0">
-        <li className="nav-item active">
-          <a className="btn btn-outline-light" href="/input">
-          + New Post
-          </a>
+      {props.loggedIn ? 
+      <ul className="navbar-nav ml-auto mt-2 mt-md-0">        
+        <li className="nav-item active ml-auto">
+          <Link to="/posts/all"><button className="btn  btn-sm btn-outline-light all-post-nav" type="button"><AllPostIcon /><span className="nav-button-spacing">All Posts</span></button></Link>
         </li>
+        <li className="nav-item active ml-auto">
+          <Link to="/manageNotes"><button className="btn btn-sm  btn-outline-light my-post-nav" type="button"><MyPostIcon /><span className="nav-button-spacing">My Posts</span></button></Link>
+        </li>
+        <li className="nav-item ml-auto">
+          <Link to="/input"><button className="btn  btn-sm btn-outline-light ml-auto new-post-nav" type="button"><NewPostIcon /><span className="nav-button-spacing">+ Post</span></button></Link></li>
+        <NavSearch />
+        <LoginNav {...props}/>
       </ul>
-    <form className="form-inline my-2 mr-2 my-md-0">
-      <input className="form-control mr-2" type="search" placeholder="Search" aria-label="Search" />
-      <button className="btn btn-outline-light" type="submit">Search</button>
-    </form>
-    <LoginNav {...props}/>
+      : 
+      <ul className="navbar-nav ml-auto mt-2 mt-md-0">
+        <li className="nav-item active ml-auto">
+          <Link to="/posts/all"><button className="btn  btn-sm btn-outline-light all-post-nav" type="button"><AllPostIcon /><span className="nav-button-spacing">All Posts</span></button></Link>
+        </li>
+        <NavSearch />
+        <LoginNav {...props}/>
+      </ul>}
+
     </div>
   </nav>
+  </div>
 );
 
 

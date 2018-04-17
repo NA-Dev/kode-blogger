@@ -2,8 +2,47 @@ nav.navbar {
   margin-bottom: 0;
   width: 100%;
   min-height: 60px;
+  -webkit-box-shadow: 0 14px 28px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.22); */
+  box-shadow: 0 14px 28px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.22);
+}
+
+.navbar-custom {
+  background-color: #01c6af;
+  background: linear-gradient(#08d5be, #00b29d);
+}
+
+a.navbar-brand {
+  font-size: 30px;
+  font-weight: 700;
+  color: #ffffff;
+}
+#navbar-brand-second{
+  font-weight: 700;
+  color: #03717f;
 }
 
 nav.form {
   justify-content: right;
 }
+
+.nav-item > a > button {
+  min-width: 127px;
+}
+
+.all-post-nav, .new-post-nav, .my-post-nav, .search-nav, .nav-user {
+  /* background:#00d2ba ; */
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 100;
+  display: inline-flex;
+  vertical-align: middle;
+  text-shadow: .5px .5px 2px rgba(0, 0, 0, 0.29);
+}
+.nav-button-spacing {
+  padding-left: 4px;
+}
+.search-button-spacing {
+  padding-left: 2px;
+}
+

@@ -1,0 +1,34 @@
+.post-list-container{
+  background:#fff;
+  margin: 10px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 8px 18px rgba(0,0,0,.15), 0 10px 10px rgba(0,0,0,.12);
+  box-shadow: 0 4px 8px rgba(0,0,0,.25), 0 6px 6px rgba(0,0,0,.15);
+}
+
+#home-post-list-block {
+  margin: 10px;
+  margin-top: 15px;
+}
+.home-post-list-title-container{
+    border-bottom: solid #03d8be 2px;
+    margin-bottom: 15px;
+    padding-top: 5px;
+}
+
+#home-post-list-title {  
+  font-family: 'Montserrat', sans-serif;
+  font-size: 34px;
+  font-weight: 300;
+  color:  #03717f;
+  padding-left: 5px;
+  line-height: 40px;
+  }
+
+.post-list-container{
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
+

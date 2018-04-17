@@ -1,0 +1,368 @@
+{
+  "object": "value",
+  "document": {
+    "object": "document",
+    "data": {},
+    "nodes": [
+      {
+        "object": "block",
+        "type": "heading-two",
+        "isVoid": false,
+        "data": {},
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              { "object": "leaf", "text": "This ", "marks": [] },
+              {
+                "object": "leaf",
+                "text": "Editor ",
+                "marks": [{ "object": "mark", "type": "bold", "data": {} }]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "paragraph",
+        "isVoid": false,
+        "data": {},
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              { "object": "leaf", "text": " makes it ", "marks": [] },
+              {
+                "object": "leaf",
+                "text": "much ",
+                "marks": [{ "object": "mark", "type": "italic", "data": {} }]
+              },
+              {
+                "object": "leaf",
+                "text": "easier to draft documents.",
+                "marks": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "paragraph",
+        "isVoid": false,
+        "data": {},
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [{ "object": "leaf", "text": "", "marks": [] }]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "paragraph",
+        "isVoid": false,
+        "data": {},
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "object": "leaf",
+                "text": "It can do the following:",
+                "marks": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "numbered-list",
+        "isVoid": false,
+        "data": {},
+        "nodes": [
+          {
+            "object": "block",
+            "type": "list-item",
+            "isVoid": false,
+            "data": {},
+            "nodes": [
+              {
+                "object": "text",
+                "leaves": [
+                  { "object": "leaf", "text": "Display small ", "marks": [] },
+                  {
+                    "object": "leaf",
+                    "text": "",
+                    "marks": [{ "object": "mark", "type": "code", "data": {} }]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "object": "block",
+            "type": "list-item",
+            "isVoid": false,
+            "data": {},
+            "nodes": [
+              {
+                "object": "text",
+                "leaves": [
+                  {
+                    "object": "leaf",
+                    "text": "Display highlighted",
+                    "marks": []
+                  },
+                  {
+                    "object": "leaf",
+                    "text": " ",
+                    "marks": [{ "object": "mark", "type": "bold", "data": {} }]
+                  },
+                  {
+                    "object": "leaf",
+                    "text": "code-blocks",
+                    "marks": [
+                      { "object": "mark", "type": "bold", "data": {} },
+                      { "object": "mark", "type": "italic", "data": {} }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "object": "block",
+            "type": "list-item",
+            "isVoid": false,
+            "data": {},
+            "nodes": [
+              {
+                "object": "text",
+                "leaves": [
+                  {
+                    "object": "leaf",
+                    "text": "Display ordered and un-ordered lists",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "object": "block",
+            "type": "list-item",
+            "isVoid": false,
+            "data": {},
+            "nodes": [
+              {
+                "object": "text",
+                "leaves": [
+                  {
+                    "object": "leaf",
+                    "text": "Display two heading sizes",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "bulleted-list",
+        "isVoid": false,
+        "data": {},
+        "nodes": [
+          {
+            "object": "block",
+            "type": "list-item",
+            "isVoid": false,
+            "data": {},
+            "nodes": [
+              {
+                "object": "text",
+                "leaves": [
+                  {
+                    "object": "leaf",
+                    "text": " Simply",
+                    "marks": [
+                      { "object": "mark", "type": "underlined", "data": {} }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "object": "block",
+            "type": "list-item",
+            "isVoid": false,
+            "data": {},
+            "nodes": [
+              {
+                "object": "text",
+                "leaves": [
+                  {
+                    "object": "leaf",
+                    "text": "Quickly",
+                    "marks": [
+                      { "object": "mark", "type": "underlined", "data": {} }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "object": "block",
+            "type": "list-item",
+            "isVoid": false,
+            "data": {},
+            "nodes": [
+              {
+                "object": "text",
+                "leaves": [
+                  {
+                    "object": "leaf",
+                    "text": "Beautifully",
+                    "marks": [
+                      { "object": "mark", "type": "underlined", "data": {} }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "paragraph",
+        "isVoid": false,
+        "data": {},
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              { "object": "leaf", "text": "You may be ", "marks": [] },
+              {
+                "object": "leaf",
+                "text": "asking ",
+                "marks": [{ "object": "mark", "type": "bold", "data": {} }]
+              },
+              { "object": "leaf", "text": "yourself", "marks": [] }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "block-quote",
+        "isVoid": false,
+        "data": {},
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "object": "leaf",
+                "text": "What can I do with this thing?",
+                "marks": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "paragraph",
+        "isVoid": false,
+        "data": {},
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [{ "object": "leaf", "text": "", "marks": [] }]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "block-code",
+        "isVoid": false,
+        "data": { "language": "js" },
+        "nodes": [
+          {
+            "object": "block",
+            "type": "code-line",
+            "isVoid": false,
+            "data": {},
+            "nodes": [
+              {
+                "object": "text",
+                "leaves": [
+                  {
+                    "object": "leaf",
+                    "text": "let ourSuggestions = {",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "object": "block",
+            "type": "code-line",
+            "isVoid": false,
+            "data": {},
+            "nodes": [
+              {
+                "object": "text",
+                "leaves": [
+                  {
+                    "object": "leaf",
+                    "text": " first: \"A coding tutorial\"",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "object": "block",
+            "type": "code-line",
+            "isVoid": false,
+            "data": {},
+            "nodes": [
+              {
+                "object": "text",
+                "leaves": [
+                  {
+                    "object": "leaf",
+                    "text": " second: \"Documentation\"",
+                    "marks": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "object": "block",
+            "type": "code-line",
+            "isVoid": false,
+            "data": {},
+            "nodes": [
+              {
+                "object": "text",
+                "leaves": [{ "object": "leaf", "text": "}", "marks": [] }]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

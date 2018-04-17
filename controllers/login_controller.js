@@ -2,17 +2,6 @@
 
 module.exports = (app, passport) => {
 
-  // app.post('/users/login', passport.authenticate('local-login'),
-  // function(req, res) {
-  //   if (req.body.remember) {
-  //     req.session.cookie.maxAge = 1000 * 60 * 3;
-  //   } else {
-  //     req.session.cookie.expires = false;
-  //   }
-    
-  //   res.sendStatus(200);
-  // });
-
   app.post('/users/login', function(req, res, next) {
     passport.authenticate('local-login', function(err, user, info) {
       if (err) { return res.status(401).send({message: err}); }

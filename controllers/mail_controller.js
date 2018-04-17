@@ -3,11 +3,11 @@ const nodemailer = require('nodemailer');
 
 // create reusable transporter object using the default SMTP transport
 const transporter = nodemailer.createTransport({
-  host: 'smtp.ethereal.email',
+  host:  'smtp.gmail.com',
   port: 587,
   auth: {
-      user: 'bmqxrcqtw7lrycjl@ethereal.email',
-      pass: '7eCkemrKshsz2hNm2f'
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS 
   }
 });
 

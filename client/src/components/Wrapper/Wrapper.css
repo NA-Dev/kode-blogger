@@ -1,10 +1,32 @@
+html, body, #root {
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+}
+.logoOne {
+  font-size: 30px;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: .5px .5px 2px rgba(0, 0, 0, 0.5);
+
+}
+.logoTwo {
+  font-size: 30px;
+  font-weight: 700;
+  color: #03717f;
+  text-shadow: .5px .5px 2px rgba(255, 255, 255, 0.29);
+
+}
 .wrapper {
-  padding-top: 50px;
-  background: #ECEFF1;
-  height: 100vh;
-  display: flex;
-  flex-flow: column;
-  padding: 20px;
+  background: rgb(236, 236, 236);
+  height: 100%;
   align-content: flex-start;
   overflow: auto;
+}
+.container-fluid {
+  position: relative;
+  padding: 15px 10% 5px 10%;
+}
+.btn {
+  display: inline-flex;
+  vertical-align: middle;
 }

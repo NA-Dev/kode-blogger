@@ -1,13 +1,21 @@
-.inputForm {
-  box-sizing: border-box;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+.save-post-button {
+  background: #03d8be;
+  color: #fff;
+  border: none;
+  text-shadow: .5px .5px 2px rgba(0, 0, 0, 0.29);
+}
+.preview-post-button {
+  font-color: #fff;
+  border: none;
+  text-shadow: .5px .5px 2px rgba(0, 0, 0, 0.29);
+
 }
 
-.editor {
+.input-form, .preview {
+  margin-bottom: 1.5em;
+}
+
+.editor, .html-output {
   border: 1px solid #ddd;
   margin-top: 0.3em;
   cursor: text;
@@ -15,22 +23,32 @@
   border-radius: 2px;
   box-shadow: inset 0px 1px 8px -3px #ABABAB;
   background: #fefefe;
-  flex: 1;
-  max-width: 1000px;
-  width: 80%;
 }
+
+.title-input {
+  margin-bottom: 1.5rem;
+}
+
+.toolbar {
+  margin-top: 1rem;
+  box-sizing: border-box;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
 
 .menu {
-  border: 1px solid #ddd;
-  padding: 16px;
-  border-radius: 2px;
-  margin-top: 02em;
+  padding: 8px 10px;
   box-shadow: inset 0px 1px 8px -3px #ABABAB;
-  background: #fefefe;
-  max-width: 1000px;
-  width: 80%;
+  background: #ddd;
 }
 
+.selector {
+  padding: 5px;
+}
 
 /* -- Slate-RichText-Example -- */
 
@@ -107,21 +125,20 @@ input:focus {
   vertical-align: text-bottom;
 }
 
-.menu > * {
-  display: inline-block;
-}
-
-.menu > * + * {
-  margin-left: 15px;
-}
-
 .button {
-  color: #aaa;
+  color: #888;
   cursor: pointer;
 }
 
 .button[data-active='true'] {
   color: black;
 }
-
 /* ------------------ */
+.btn-outline-success {
+  border-color: #03d8be
+  !important;
+  color: #03d8be;
+}
+.btn-outline-success:hover {
+  background-color: #03d8be;
+}

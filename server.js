@@ -3,7 +3,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 const session = require("express-session");
-const SequelStore = require('sequelstore-connect')(session);
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const flash = require("connect-flash");
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -12,6 +12,8 @@ const apiController = require("./controllers/api_controller");
 const loginController = require("./controllers/login_controller");
 const userController = require("./controllers/user_controller");
 const noteController = require("./controllers/note_controller");
+const postController = require('./controllers/post_controller');
+const fetchController = require('./controllers/fetch_controller');
 
 //Setup passport
 const passport = require('passport');
@@ -26,23 +28,29 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
-db.users.sync();
-db.notes.sync();
+
+const myStore = new SequelizeStore({db: db.sequelize});
 
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
   secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
   cookie: { secure: false },
-  // store: new SequelStore({ database: db.sequelize})
-}))
+  store: myStore 
+}));
+
+db.users.sync();
+db.notes.sync();
+db.posts.sync();
+db.articles.sync()
+myStore.sync();
 
 // Use Controllers
 app.use("/api", apiController);
 app.use(noteController);
-// app.use("/login", loginController);
-// app.use("/user", userController);
+app.use(fetchController);
+app.use(postController);
 
 //Persistent login sessions (maybe?)
 app.use(passport.initialize());
@@ -50,6 +58,7 @@ app.use(passport.session());
 app.use(flash());
 require('./controllers/user_controller')(app, passport);
 require('./controllers/login_controller')(app, passport);
+
 
 // Send all other requests to the React app
 app.get("*", function(req, res) {

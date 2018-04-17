@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './SignupForm.css';
+import SignupIcon from '../Icons/SignupIcon';
 
 class SignupForm extends Component {
   constructor(props) {
@@ -68,22 +69,42 @@ class SignupForm extends Component {
 
   render() {
     return (
-      <form className="signupContainer">
-        <div>
-          {this.state.signupSubmitted ? <p>Sign-up complete! Check your email to verify your account. </p> : ''}
-          {this.state.passwordInvalid ? <p>Passwords do not match!</p> : ''}
-          {this.state.emailInvalid ? <p>Email is not valid</p> : ''}
+      <div className="bg-dark p-5 col-md-6 offset-md-3 mt-5 border border-dark rounded" id="signupContainer">
+        <div id="logoSignup"><span className="logoOne"> 
+        kode</span><span className="logoTwo">Blogger</span>
         </div>
-        <label htmlFor="username">Username</label>
-        <input type="text" name="username" onChange={this.handleFormInput} value={this.state.username} />
-        <label htmlFor="email">Email</label>
-        <input className={this.state.emailInvalid ? 'invalid' : ''} type="email" name="email" onChange={this.handleFormInput} value={this.state.email} />
-        <label htmlFor="password">Password</label>
-        <input className={this.state.passwordInvalid ? 'invalid' : ''} type="password" name="password" onChange={this.handleFormInput} value={this.state.password} />
-        <label htmlFor="password2">Confirm Password</label>
-        <input className={this.state.passwordInvalid ? 'invalid' : ''} type="password" name="password2" onChange={this.handleFormInput} value={this.state.password2} />
-        <button type="submit" onClick={this.onFormSubmit}>Sign Up</button>
-      </form>
+        <h3 className="text-light font-weight-bold">Sign Up</h3>
+        <form className="mt-0" autoComplete="on">
+          <div>
+            {this.state.signupSubmitted ? <p className="alert alert-success">Sign-up complete! Check your email to verify your account. </p> : ''}
+            {this.state.passwordInvalid ? <p className="alert alert-primary">Passwords do not match!</p> : ''}
+            {this.state.emailInvalid ? <p className="alert alert-primary">Email is not valid</p> : ''}
+          </div>
+          <div className="form-group">
+            <label className="text-light" htmlFor="username">Username</label>
+            <input type="text" name="username" autoComplete="username" onChange={this.handleFormInput} value={this.state.username} />
+          </div>
+          <div className="form-group">
+            <label className="text-light" htmlFor="email">Email</label>
+            <input className={this.state.emailInvalid ? 'invalid' : ''} type="email" name="email" onChange={this.handleFormInput} value={this.state.email} />
+          </div>
+          <div className="form-group">
+            <label className="text-light" htmlFor="password">Password</label>
+            <input className={this.state.passwordInvalid ? 'invalid' : ''} 
+              type="password" 
+              name="password" autoComplete="new-password" 
+              onChange={this.handleFormInput} value={this.state.password} />
+          </div>
+          <div className="form-group">
+            <label className="text-light" htmlFor="password2">Confirm Password</label>
+            <input className={this.state.passwordInvalid ? 'invalid' : ''} 
+              type="password" name="password2" autoComplete="new-password" 
+              onChange={this.handleFormInput} 
+              value={this.state.password2} />
+          </div>
+          <button type="submit" className="btn btn-outline-light all-post-button" onClick={this.onFormSubmit}><SignupIcon /><span className="button-spacing">Sign Up</span></button>
+        </form>
+      </div>
     )
   }
 }

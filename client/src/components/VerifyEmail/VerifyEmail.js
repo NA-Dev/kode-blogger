@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Verify } from 'crypto';
 
 class VerifyEmail extends Component {
   constructor(props) {
@@ -20,8 +19,8 @@ class VerifyEmail extends Component {
   }
 
   render() {
-    return (<div>
-      {this.state.verified ? <p>Account verified! Please login.</p> : <p>Unable to verify account. Contact support.</p>}
+    return (<div className="text-center">
+      {this.state.verified ? <p className="alert alert-success">Account verified! Please login.</p> : <p className="alert alert-danger">Unable to verify account. Contact support.</p>}
       </div>)
   }
 }

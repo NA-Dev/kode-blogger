@@ -1,212 +1,548 @@
 {
+  "object": "value",
   "document": {
-    "nodes": [
-      {
-        "object": "block",
-        "type": "paragraph",
-        "nodes": [
-          {
-            "object": "text",
-            "leaves": [
-              {
-                "text":
-                  "There are certain behaviors that require rendering dynamic marks on string of text, like rendering code highlighting. For example:"
-              }
-            ]
-          }
-        ]
+      "object": "document",
+      "data": {
+          "syntax": "javascript"
       },
-      {
-        "object": "block",
-        "type": "block-code",
-        "data": {
-          "language": "js"
-        },
-        "nodes": [
+      "nodes": [
           {
-            "object": "block",
-            "type": "code_line",
-            "nodes": [
-              {
-                "object": "text",
-                "leaves": [
+              "object": "block",
+              "type": "heading-two",
+              "isVoid": false,
+              "data": {
+                  "syntax": "javascript"
+              },
+              "nodes": [
                   {
-                    "text": "// A simple FizzBuzz implementation."
+                      "object": "text",
+                      "leaves": [
+                          {
+                              "object": "leaf",
+                              "text": "This ",
+                              "marks": []
+                          },
+                          {
+                              "object": "leaf",
+                              "text": "Editor ",
+                              "marks": [
+                                  {
+                                      "object": "mark",
+                                      "type": "bold",
+                                      "data": {
+                                          "syntax": "javascript"
+                                      }
+                                  }
+                              ]
+                          }
+                      ]
                   }
-                ]
-              }
-            ]
+              ]
           },
           {
-            "object": "block",
-            "type": "code_line",
-            "nodes": [
-              {
-                "object": "text",
-                "leaves": [
+              "object": "block",
+              "type": "paragraph",
+              "isVoid": false,
+              "data": {
+                  "syntax": "javascript"
+              },
+              "nodes": [
                   {
-                    "text": "for (var i = 1; i <= 100; i++) {"
+                      "object": "text",
+                      "leaves": [
+                          {
+                              "object": "leaf",
+                              "text": "makes it ",
+                              "marks": []
+                          },
+                          {
+                              "object": "leaf",
+                              "text": "much ",
+                              "marks": [
+                                  {
+                                      "object": "mark",
+                                      "type": "italic",
+                                      "data": {
+                                          "syntax": "javascript"
+                                      }
+                                  }
+                              ]
+                          },
+                          {
+                              "object": "leaf",
+                              "text": "easier to draft documents with code",
+                              "marks": []
+                          }
+                      ]
                   }
-                ]
-              }
-            ]
+              ]
           },
           {
-            "object": "block",
-            "type": "code_line",
-            "nodes": [
-              {
-                "object": "text",
-                "leaves": [
+              "object": "block",
+              "type": "code_block",
+              "isVoid": false,
+              "data": {
+                  "syntax": "javascript"
+              },
+              "nodes": [
                   {
-                    "text": "  if (i % 15 == 0) {"
+                      "object": "block",
+                      "type": "code_line",
+                      "isVoid": false,
+                      "data": {
+                          "syntax": "javascript"
+                      },
+                      "nodes": [
+                          {
+                              "object": "text",
+                              "leaves": [
+                                  {
+                                      "object": "leaf",
+                                      "text": "for ( i = 0; i < this.length; i++) {",
+                                      "marks": []
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "object": "block",
+                      "type": "code_line",
+                      "isVoid": false,
+                      "data": {
+                          "syntax": "javascript"
+                      },
+                      "nodes": [
+                          {
+                              "object": "text",
+                              "leaves": [
+                                  {
+                                      "object": "leaf",
+                                      "text": "    this[i] += 2",
+                                      "marks": []
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "object": "block",
+                      "type": "code_line",
+                      "isVoid": false,
+                      "data": {
+                          "syntax": "javascript"
+                      },
+                      "nodes": [
+                          {
+                              "object": "text",
+                              "leaves": [
+                                  {
+                                      "object": "leaf",
+                                      "text": "}",
+                                      "marks": []
+                                  }
+                              ]
+                          }
+                      ]
                   }
-                ]
-              }
-            ]
+              ]
           },
           {
-            "object": "block",
-            "type": "code_line",
-            "nodes": [
-              {
-                "object": "text",
-                "leaves": [
+              "object": "block",
+              "type": "numbered-list",
+              "isVoid": false,
+              "data": {
+                  "syntax": "javascript"
+              },
+              "nodes": [
                   {
-                    "text": "    console.log('Fizz Buzz');"
+                      "object": "block",
+                      "type": "list-item",
+                      "isVoid": false,
+                      "data": {
+                          "syntax": "javascript"
+                      },
+                      "nodes": [
+                          {
+                              "object": "text",
+                              "leaves": [
+                                  {
+                                      "object": "leaf",
+                                      "text": "Display small ",
+                                      "marks": []
+                                  },
+                                  {
+                                      "object": "leaf",
+                                      "text": "code-lines",
+                                      "marks": [
+                                          {
+                                              "object": "mark",
+                                              "type": "code",
+                                              "data": {
+                                                  "syntax": "javascript"
+                                              }
+                                          }
+                                      ]
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "object": "block",
+                      "type": "list-item",
+                      "isVoid": false,
+                      "data": {
+                          "syntax": "javascript"
+                      },
+                      "nodes": [
+                          {
+                              "object": "text",
+                              "leaves": [
+                                  {
+                                      "object": "leaf",
+                                      "text": "Display large, highlighted",
+                                      "marks": []
+                                  },
+                                  {
+                                      "object": "leaf",
+                                      "text": " ",
+                                      "marks": [
+                                          {
+                                              "object": "mark",
+                                              "type": "bold",
+                                              "data": {
+                                                  "syntax": "javascript"
+                                              }
+                                          }
+                                      ]
+                                  },
+                                  {
+                                      "object": "leaf",
+                                      "text": "code-blocks",
+                                      "marks": [
+                                          {
+                                              "object": "mark",
+                                              "type": "bold",
+                                              "data": {
+                                                  "syntax": "javascript"
+                                              }
+                                          },
+                                          {
+                                              "object": "mark",
+                                              "type": "italic",
+                                              "data": {
+                                                  "syntax": "javascript"
+                                              }
+                                          }
+                                      ]
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "object": "block",
+                      "type": "list-item",
+                      "isVoid": false,
+                      "data": {
+                          "syntax": "javascript"
+                      },
+                      "nodes": [
+                          {
+                              "object": "text",
+                              "leaves": [
+                                  {
+                                      "object": "leaf",
+                                      "text": "Display ordered and un-ordered lists",
+                                      "marks": []
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "object": "block",
+                      "type": "list-item",
+                      "isVoid": false,
+                      "data": {
+                          "syntax": "javascript"
+                      },
+                      "nodes": [
+                          {
+                              "object": "text",
+                              "leaves": [
+                                  {
+                                      "object": "leaf",
+                                      "text": "Display two heading sizes",
+                                      "marks": []
+                                  }
+                              ]
+                          }
+                      ]
                   }
-                ]
-              }
-            ]
+              ]
           },
           {
-            "object": "block",
-            "type": "code_line",
-            "nodes": [
-              {
-                "object": "text",
-                "leaves": [
+              "object": "block",
+              "type": "code_block",
+              "isVoid": false,
+              "data": {
+                  "syntax": "javascript"
+              },
+              "nodes": [
                   {
-                    "text": "  } else if (i % 5 == 0) {"
+                      "object": "block",
+                      "type": "code_line",
+                      "isVoid": false,
+                      "data": {
+                          "syntax": "javascript"
+                      },
+                      "nodes": [
+                          {
+                              "object": "text",
+                              "leaves": [
+                                  {
+                                      "object": "leaf",
+                                      "text": "this.how = {",
+                                      "marks": []
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "object": "block",
+                      "type": "code_line",
+                      "isVoid": false,
+                      "data": {
+                          "syntax": "javascript"
+                      },
+                      "nodes": [
+                          {
+                              "object": "text",
+                              "leaves": [
+                                  {
+                                      "object": "leaf",
+                                      "text": "  simply: true,",
+                                      "marks": []
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "object": "block",
+                      "type": "code_line",
+                      "isVoid": false,
+                      "data": {
+                          "syntax": "javascript"
+                      },
+                      "nodes": [
+                          {
+                              "object": "text",
+                              "leaves": [
+                                  {
+                                      "object": "leaf",
+                                      "text": "  quickly: true,",
+                                      "marks": []
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "object": "block",
+                      "type": "code_line",
+                      "isVoid": false,
+                      "data": {
+                          "syntax": "javascript"
+                      },
+                      "nodes": [
+                          {
+                              "object": "text",
+                              "leaves": [
+                                  {
+                                      "object": "leaf",
+                                      "text": "  beautifully: true",
+                                      "marks": []
+                                  }
+                              ]
+                          }
+                      ]
                   }
-                ]
-              }
-            ]
+              ]
           },
           {
-            "object": "block",
-            "type": "code_line",
-            "nodes": [
-              {
-                "object": "text",
-                "leaves": [
+              "object": "block",
+              "type": "paragraph",
+              "isVoid": false,
+              "data": {
+                  "syntax": "javascript"
+              },
+              "nodes": [
                   {
-                    "text": "    console.log('Buzz');"
+                      "object": "text",
+                      "leaves": [
+                          {
+                              "object": "leaf",
+                              "text": "",
+                              "marks": []
+                          }
+                      ]
                   }
-                ]
-              }
-            ]
+              ]
           },
           {
-            "object": "block",
-            "type": "code_line",
-            "nodes": [
-              {
-                "object": "text",
-                "leaves": [
+              "object": "block",
+              "type": "block-quote",
+              "isVoid": false,
+              "data": {
+                  "syntax": "javascript"
+              },
+              "nodes": [
                   {
-                    "text": "  } else if (i % 3 == 0) {"
+                      "object": "text",
+                      "leaves": [
+                          {
+                              "object": "leaf",
+                              "text": "What can I do with this thing?",
+                              "marks": []
+                          }
+                      ]
                   }
-                ]
-              }
-            ]
+              ]
           },
           {
-            "object": "block",
-            "type": "code_line",
-            "nodes": [
-              {
-                "object": "text",
-                "leaves": [
+              "object": "block",
+              "type": "code_block",
+              "isVoid": false,
+              "data": {
+                  "syntax": "javascript"
+              },
+              "nodes": [
                   {
-                    "text": "    console.log('Fizz');"
+                      "object": "block",
+                      "type": "code_line",
+                      "isVoid": false,
+                      "data": {
+                          "syntax": "javascript"
+                      },
+                      "nodes": [
+                          {
+                              "object": "text",
+                              "leaves": [
+                                  {
+                                      "object": "leaf",
+                                      "text": "let ourSuggestions = {",
+                                      "marks": []
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "object": "block",
+                      "type": "code_line",
+                      "isVoid": false,
+                      "data": {
+                          "syntax": "javascript"
+                      },
+                      "nodes": [
+                          {
+                              "object": "text",
+                              "leaves": [
+                                  {
+                                      "object": "leaf",
+                                      "text": "    1: write a tutorial,",
+                                      "marks": []
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "object": "block",
+                      "type": "code_line",
+                      "isVoid": false,
+                      "data": {
+                          "syntax": "javascript"
+                      },
+                      "nodes": [
+                          {
+                              "object": "text",
+                              "leaves": [
+                                  {
+                                      "object": "leaf",
+                                      "text": "    2: create documentation,",
+                                      "marks": []
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "object": "block",
+                      "type": "code_line",
+                      "isVoid": false,
+                      "data": {
+                          "syntax": "javascript"
+                      },
+                      "nodes": [
+                          {
+                              "object": "text",
+                              "leaves": [
+                                  {
+                                      "object": "leaf",
+                                      "text": "    3: take notes",
+                                      "marks": []
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "object": "block",
+                      "type": "code_line",
+                      "isVoid": false,
+                      "data": {
+                          "syntax": "javascript"
+                      },
+                      "nodes": [
+                          {
+                              "object": "text",
+                              "leaves": [
+                                  {
+                                      "object": "leaf",
+                                      "text": "}",
+                                      "marks": []
+                                  }
+                              ]
+                          }
+                      ]
                   }
-                ]
-              }
-            ]
+              ]
           },
           {
-            "object": "block",
-            "type": "code_line",
-            "nodes": [
-              {
-                "object": "text",
-                "leaves": [
+              "object": "block",
+              "type": "paragraph",
+              "isVoid": false,
+              "data": {
+                  "syntax": "javascript"
+              },
+              "nodes": [
                   {
-                    "text": "  } else {"
+                      "object": "text",
+                      "leaves": [
+                          {
+                              "object": "leaf",
+                              "text": "",
+                              "marks": []
+                          }
+                      ]
                   }
-                ]
-              }
-            ]
-          },
-          {
-            "object": "block",
-            "type": "code_line",
-            "nodes": [
-              {
-                "object": "text",
-                "leaves": [
-                  {
-                    "text": "    console.log(i);"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "object": "block",
-            "type": "code_line",
-            "nodes": [
-              {
-                "object": "text",
-                "leaves": [
-                  {
-                    "text": "  }"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "object": "block",
-            "type": "code_line",
-            "nodes": [
-              {
-                "object": "text",
-                "leaves": [
-                  {
-                    "text": "}"
-                  }
-                ]
-              }
-            ]
+              ]
           }
-        ]
-      },
-      {
-        "object": "block",
-        "type": "paragraph",
-        "nodes": [
-          {
-            "object": "text",
-            "leaves": [
-              {
-                "text": "Try it out for yourself!"
-              }
-            ]
-          }
-        ]
-      }
-    ]
+      ]
   }
 }
