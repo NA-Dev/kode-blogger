@@ -52,14 +52,12 @@ class SearchResults extends Component {
             onChange={this.onSearchChanged}/>
           <button className="btn btn-outline-success ml-2" type="submit" onClick={this.onSearchSubmit}>Search</button>
         </form>
-      <ul className="list-group">
+      <ul className="list-group text-center">
       {this.state.results.length ? 
         this.state.results.map(result => 
-        <PostListItem key={result.id} {...result}>
         <Link to={`/view/${result.id}`}>
-        <button className="btn btn-outline-dark" type="button">View Post</button>
+        <PostListItem key={result.id} {...result} />
         </Link>
-        </PostListItem>
         ) 
         : <div className="text-center">No Results</div>}
       </ul>
