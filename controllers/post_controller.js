@@ -35,15 +35,23 @@ router.get('/posts/:id', (req, res) => {
   db.posts.findOne({
     where: {id: req.params.id}
   }).then(data => {
-    if (req.session.passport.user) {
-      if (data.published || data.author == req.session.passport.user) {
-        return res.json(data);
+    if (req.session.passport) {
+      if (req.session.passport.user) {
+        if (data.published || data.author == req.session.passport.user) {
+          return res.json(data);
+        }
+      } else {
+        if (data.published) {
+          return res.json(data);
+        }       
       }
     } else {
-      if (data.published) {
-        return res.json(data);
+      console.log('Hit the else');
+        if (data.published) {
+          return res.json(data);
+        }
       }
-    }
+    
 
     return res.status(404).send();
   })

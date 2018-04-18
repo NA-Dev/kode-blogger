@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import PostListItem from '../PostListItem/PostListItem';
 import postApi from '../../utils/postAPI';
 import {Redirect} from 'react-router-dom';
+import SearchIcon from '../Icons/SearchIcon';
 
 
 class SearchResults extends Component {
@@ -50,7 +51,7 @@ class SearchResults extends Component {
           <input style={{width: "60%"}} className="form-control" type="text" 
             value={this.state.searchString} 
             onChange={this.onSearchChanged}/>
-          <button className="btn btn-outline-success ml-2" type="submit" onClick={this.onSearchSubmit}>Search</button>
+          <button className="btn btn-success ml-2" type="submit" onClick={this.onSearchSubmit}><SearchIcon /><span className="button-spacing">Search</span></button>
         </form>
       <ul className="list-group text-center">
       {this.state.results.length ? 

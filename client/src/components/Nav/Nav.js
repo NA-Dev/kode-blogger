@@ -13,7 +13,7 @@ import UserIcon from '../Icons/UserIcon';
 
 const Nav = (props) => (
   <div className="container-flex">
-  <nav className="navbar navbar-expand-lg navbar-custom mb-3">
+  <nav className="navbar navbar-expand-xl navbar-custom mb-3">
     <Link to="/" className="navbar-brand"> 
     <span className="logoOne"> 
       kode</span><span className="logoTwo">Blogger</span></Link>
