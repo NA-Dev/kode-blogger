@@ -22,7 +22,7 @@ html, body, #root {
   align-content: flex-start;
   overflow: auto;
 }
-.container-fluid {
+.container-fluid{
   position: relative;
   padding: 15px 10% 5px 10%;
 }

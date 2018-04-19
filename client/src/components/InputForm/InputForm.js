@@ -225,7 +225,7 @@ class InputForm extends Component {
           noteId: data.data.id
         })
         confirmAlert({
-          title: `Post updated. Publish in "My Posts"`,
+          title: `Post updated.`,
           buttons: [
             {
               label: 'OK'
